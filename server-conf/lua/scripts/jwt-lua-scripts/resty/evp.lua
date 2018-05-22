@@ -1,6 +1,3 @@
--- Copyright (C) by Daniel Hiltgen (daniel.hiltgen@docker.com)
-
-
 local ffi = require "ffi"
 local _C = ffi.C
 local _M = { _VERSION = '0.01' }
@@ -11,14 +8,10 @@ local CONST = {
 }
 _M.CONST = CONST
 
-
--- Reference: https://wiki.openssl.org/index.php/EVP_Signing_and_Verifying
 ffi.cdef[[
-// Error handling
 unsigned long ERR_get_error(void);
 const char * ERR_reason_error_string(unsigned long e);
 
-// Basic IO
 typedef struct bio_st BIO;
 typedef struct bio_method_st BIO_METHOD;
 BIO_METHOD *BIO_s_mem(void);
@@ -27,7 +20,6 @@ int	BIO_puts(BIO *bp,const char *buf);
 void BIO_vfree(BIO *a);
 int    BIO_write(BIO *b, const void *buf, int len);
 
-// RSA
 typedef struct rsa_st RSA;
 int RSA_size(const RSA *rsa);
 void RSA_free(RSA *rsa);
@@ -61,7 +53,7 @@ typedef struct x509_store_st X509_STORE;
 typedef struct X509_crl_st X509_CRL;
 X509_STORE *X509_STORE_new(void );
 int X509_STORE_add_cert(X509_STORE *ctx, X509 *x);
-    // Use this if we want to load the certs directly from a variables
+
 int X509_STORE_add_crl(X509_STORE *ctx, X509_CRL *x);
 int     X509_STORE_load_locations (X509_STORE *ctx,
                 const char *file, const char *dir);
@@ -127,7 +119,6 @@ function RSASigner.new(self, pem_private_key)
         return _err()
     end
 
-    -- TODO might want to support password protected private keys...
     local rsa = _C.PEM_read_bio_RSAPrivateKey(bio, nil, nil, nil)
     ffi.gc(rsa, _C.RSA_free)
 
