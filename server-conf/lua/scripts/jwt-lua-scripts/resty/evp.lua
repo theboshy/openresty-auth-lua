@@ -1,3 +1,6 @@
+-- Copyright (C) by Daniel Hiltgen (daniel.hiltgen@docker.com)
+-- Modifications copyright (C) 2018 Peter Lobo
+
 local ffi = require "ffi"
 local _C = ffi.C
 local _M = { _VERSION = '0.01' }
