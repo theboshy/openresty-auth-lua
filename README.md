@@ -18,6 +18,8 @@ if auth_header == nil then
 
 ```
 
+[referencia ](https://openresty-reference.readthedocs.io/en/latest/Lua_Nginx_API/#http-method-constants)
+
 
 - Update readme
 
