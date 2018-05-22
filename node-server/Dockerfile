@@ -4,5 +4,5 @@ COPY . /app
 
 RUN cd /app; npm install
 
-EXPOSE 3000
+EXPOSE 80
 CMD ["node", "/app/server.js"]
